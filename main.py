@@ -17,19 +17,21 @@ ev3 = EV3Brick()
 
 int stepCounter = 0
 
+int movements = 0
+
 # Write your program here.
 #ev3.speaker.beep()
 
 # Initialize EV3 Brick
 ev3 = EV3Brick()
 
-# Initialize EV3 MotorA
+# Initialize EV3 MotorA - Wheel
 motor_a = Motor(Port.A)
 
-# Initialize EV3 MotorB
+# Initialize EV3 MotorB - Wheel
 motor_b = Motor(Port.B)
 
-# Initialize EV3 MotorC
+# Initialize EV3 MotorC - Grip
 motor_c = Motor(Port.C)
 
 # Initialize EV3 MotorD
@@ -45,23 +47,25 @@ motor_d = Motor(Port.D)
 #Following route to task
 class FirstRoute
     colorVariable = Color()
-    if colorVariable = Color.BLACK:
-        motor_a.run_time(180, 500, Brake.coast wait.false)
-        motor_b.run_time(90, 500)
+    while movements < 100
+        if colorVariable = Color.BLACK:
+            motor_a.run_time(180, 500, Brake.coast wait.false)
+            motor_b.run_time(90, 500)
 
-    elif colorVariable = Color.WHITE:
-        motor_a.run_time(90, 250, Brake.coast wait.false)
-        motor_b.run_time(180, 250)
-        pass 
+        elif colorVariable = Color.WHITE:
+            motor_a.run_time(90, 250, Brake.coast wait.false)
+            motor_b.run_time(180, 250)
+        movements += 1
+            pass 
 
 #Moves stepcounter every 500 ms
 class CountingSteps
-    while stepCounter < 10:
+    while stepCounter < 16:
         motor_a.run_time(360, 500, Brake.coast, wait.false)
         motor_b.run_time(360, 500)
         sleep(500)
-        stepCounter = stepCounter + 1
-        #stepCounter +=1
+        #stepCounter = stepCounter + 1
+        stepCounter +=1
         pass
 
 #Gripping the wheel and pulls it backwards
@@ -70,3 +74,6 @@ class GripWheel
     
     motor_a.run_time(-360, 2000, Brake.coast, wait.false)
     motor_b.run_time(-360, 2000)
+
+    motor_c.run_time(-180, 1000)
+    pass
